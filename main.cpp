@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <set>
 
 using namespace std;
 
@@ -117,9 +118,64 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-// bool dfs(……) {
-//     // Your code here
-// }
+bool dfs(int r, int c, //Shows row and column
+        const vector<vector<int>>& maze, //maze
+        vector<vector<bool>>& visited, //visited cells
+        vector<vector<int>>& parent_r, //parent row for reconstruction
+        vector<vector<int>>& parent_c, // parent col for reconstruction
+        int exit_r, int exit_c) { //exit coords
+
+    //# rows in maze
+    int x = maze.size();
+
+    //# col in maze
+    int y = maze[0].size();
+
+    //Base Cases
+    //If (r,c) outside of maze then stop
+    if (r < 0 || c < 0 || r >= x || c >= y) {
+        return false;
+    }
+
+    //If cell is wall or 1 then stop
+    if (maze[r][c] == 1) {
+        return false;
+    }
+
+    //If already visited the cell then stop
+    if (visited[r][c]) {
+        return false;
+    }
+
+    //Make current cell as visited
+    visited[r][c] = true;
+
+    //If the cell is the exit
+    if (r == exit_r && c == exit_c) {
+        return true;
+    }
+
+    /* reference for dr and dc
+    int dr[4] = { -1,  0,  1,  0 };
+
+    ex:
+    dr[0] == -1
+    r-1 == new row // UP
+
+
+    int dc[4] = {  0,  1,  0, -1 };
+    ex:
+    dc[1] == 1
+    c + 1 == new col // Right
+
+     */
+
+    //Directions for DFS
+    for (int direction=0; direction < 4; direction++) {
+        int neighborR = r + dr[direction]; //make next row
+        int neighborC = c + dc[direction]; //make next col
+
+}
 
 
 // ----------------------------------------------------------
