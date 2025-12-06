@@ -177,6 +177,12 @@ bool dfs(int r, int c, //Shows row and column
         //make next col
         int neighborC = c + dc[direction];
 
+        //If bounds then skip
+        if (neighborR < 0 || neighborC < 0 || neighborR >= x || neighborC >= y) {
+            continue;
+        }
+
+
         //If wall then skip
         if (maze[neighborR][neighborC] == 1) {
             continue;
