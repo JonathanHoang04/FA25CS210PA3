@@ -172,9 +172,45 @@ bool dfs(int r, int c, //Shows row and column
 
     //Directions for DFS
     for (int direction=0; direction < 4; direction++) {
-        int neighborR = r + dr[direction]; //make next row
-        int neighborC = c + dc[direction]; //make next col
+        //make next row
+        int neighborR = r + dr[direction];
+        //make next col
+        int neighborC = c + dc[direction];
 
+        //If wall then skip
+        if (maze[neighborR][neighborC] == 1) {
+            continue;
+        }
+
+        //If visited cell then skip
+        if (visited[neighborR][neighborC]) {
+            continue;
+        }
+
+        //Set new row and column of neighbor
+        parent_c[neighborR][neighborC] = c;
+        parent_r[neighborR][neighborC] = r;
+
+
+
+
+        /*
+         Reference dfs
+        dfs(int r, int c, //Shows row and column
+        const vector<vector<int>>& maze, //maze
+        vector<vector<bool>>& visited, //visited cells
+        vector<vector<int>>& parent_r, //parent row for reconstruction
+        vector<vector<int>>& parent_c, // parent col for reconstruction
+        int exit_r, int exit_c) { //exit coords
+         */
+        //Recursive Call
+        if (dfs(neighborR, neighborC, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+            return true;
+        }
+
+    }
+//if all direction fail
+return false;
 }
 
 
